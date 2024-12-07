@@ -1,0 +1,9 @@
+a {
+    text-decoration: none; /* Loại bỏ gạch dưới */
+    color: #000; /* Thay đổi màu sắc liên kết (ví dụ: màu đen) */
+}
+
+/* Tùy chọn cho khi người dùng hover vào liên kết */
+a:hover {
+    color: #007bff; /* Thay đổi màu khi hover (màu xanh dương khi di chuột vào liên kết) */
+}
