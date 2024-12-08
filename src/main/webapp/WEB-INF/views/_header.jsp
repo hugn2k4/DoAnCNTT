@@ -131,10 +131,10 @@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Sản phẩm mới</a>
+          <a class="nav-link" href="${pageContext.request.contextPath}/new-products">Sản phẩm mới</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Sản phẩm bán chạy</a>
+          <a class="nav-link" href="${pageContext.request.contextPath}/best-selling">Sản phẩm bán chạy</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Khuyến mãi</a>

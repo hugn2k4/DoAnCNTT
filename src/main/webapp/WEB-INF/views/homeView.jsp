@@ -118,7 +118,6 @@
   <div class="container">
     <header class="section-heading py-4 d-flex justify-content-between">
       <h3 class="section-title">Sản phẩm mới nhất</h3>
-      <a class="btn btn-secondary" href="#" role="button" style="height: fit-content;">Xem tất cả</a>
     </header> <!-- section-heading.// -->
     <div class="row item-grid">
       <c:forEach var="product" items="${requestScope.products}">

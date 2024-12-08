@@ -34,30 +34,7 @@
       <aside class="col-md-4 col-lg-3 mb-md-0 mb-3">
         <div class="card">
           <form action="${pageContext.request.contextPath}/category" method="get">
-            <article class="filter-group">
-              <div class="filter-content collapse show" id="collapse_1">
-                <div class="card-body pt-0">
-                  <input type="hidden" name="id" value="${requestScope.category.id}">
-                  <c:choose>
-                    <c:when test="${not empty requestScope.publishers}">
-                      <c:forEach var="publisher" items="${requestScope.publishers}" varStatus="status">
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" value="${publisher}"
-                                 id="checkbox_publisher_${status.index}" name="checkedPublishers"
-                            ${requestScope.checkedPublishers.contains(publisher) ? 'checked' : ''}>
-                          <label class="form-check-label" for="checkbox_publisher_${status.index}">
-                              ${publisher}
-                          </label>
-                        </div>
-                      </c:forEach>
-                    </c:when>
-                    <c:otherwise>
-                      Không có
-                    </c:otherwise>
-                  </c:choose>
-                </div> <!-- card-body.// -->
-              </div>
-            </article>
+            <input type="hidden" name="id" value="${requestScope.category.id}">
 
             <article class="filter-group">
               <header class="card-header my-1">
@@ -162,6 +139,7 @@
                 </div> <!-- card-body.// -->
               </div>
             </article>
+
             <article class="filter-group">
               <header class="card-header my-1">
                 <a data-bs-toggle="collapse" href="#collapse_3" aria-expanded="true"

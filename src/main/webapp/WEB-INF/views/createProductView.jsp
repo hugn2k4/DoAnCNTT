@@ -324,9 +324,7 @@
                   </c:forEach>
                 </ul>
               </div>
-
           </div>
-        </div>
         <div class="mb-3">
           <label for="product-description" class="form-label">Mô tả sản phẩm</label>
           <textarea class="form-control ${not empty requestScope.violations.descriptionViolations

@@ -213,4 +213,18 @@ public class ProductDAO extends AbstractDAO<Product> {
             return query.list();
         }
     }
+
+    public List<Product> getBestSellingProducts(int limit, int offset) {
+        try (Session session = getCurrentSession()) {
+            // Truy vấn sản phẩm bán chạy nhất dựa trên totalBuy
+            String hql = "FROM Product p ORDER BY p.totalBuy DESC";  // Sắp xếp giảm dần theo totalBuy
+            Query<Product> query = session.createQuery(hql, Product.class);
+
+            // Thiết lập phân trang
+            query.setFirstResult(offset);
+            query.setMaxResults(limit);
+
+            return query.list();  // Trả về danh sách sản phẩm bán chạy
+        }
+    }
 }

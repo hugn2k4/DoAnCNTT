@@ -125,6 +125,22 @@ public class ProductService extends ProductDAO {
         return new ProductDAO();
     }
 
+    // Lấy danh sách sản phẩm mới theo giới hạn và offset
+    public List<Product> getNewProducts(int limit, int offset) {
+        return getProductDAO().getByQuery("%%", 6, 0);
+    }
 
+    public List<Product> getBestSellingProducts(int limit, int offset) {
+        return getProductDAO().getBestSellingProducts( 6, 0);
+    }
 
+    public int countProductsMax1Page() {
+        try (Session session = getCurrentSession()) {
+            Long count = session.createQuery(
+                            "SELECT COUNT(id) FROM Product", Long.class)
+                    .uniqueResult();
+            int actualCount = count != null ? count.intValue() : 0;
+            return Math.min(actualCount, 6); // Trả về tối đa là 6
+        }
+    }
 }

@@ -91,7 +91,11 @@ public class ProductServlet extends HttpServlet {
                     .map(userId -> Protector.of(() -> wishlistItemService
                             .countByUserIdAndProductId(userId, product.getId())).get(0))
                     .orElse(0);
+            List<Category> categories = Protector.of(() -> new CategoryService().getPart(12, 0))
+                    .get(ArrayList::new);
 
+            // Gửi dữ liệu tới JSP
+            request.setAttribute("categories", categories);
             request.setAttribute("category", category);
             request.setAttribute("product", product);
             request.setAttribute("totalProductReviews", totalProductReviews);
