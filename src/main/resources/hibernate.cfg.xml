@@ -8,7 +8,7 @@
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="connection.url">jdbc:mysql://127.0.0.1:3306/laptop</property>
     <property name="connection.username">root</property>
-    <property name="connection.password">hung12345</property>
+    <property name="connection.password">minh</property>
         <!-- JDBC connection pool settings ... using built-in test pool -->
         <property name="connection.pool_size">1</property>
         <!-- Echo the SQL to stdout -->
@@ -19,6 +19,7 @@
 <!--        <property name="hbm2ddl.auto">create-drop</property>-->
 <!--        <property name="hbm2ddl.auto">update</property>-->
         <!-- dbcp connection pool configuration -->
+        <property name="hibernate.jdbc.time_zone">Asia/Ho_Chi_Minh</property>
         <property name="hibernate.dbcp.initialSize">5</property>
         <property name="hibernate.dbcp.maxTotal">20</property>
         <property name="hibernate.dbcp.maxIdle">10</property>
