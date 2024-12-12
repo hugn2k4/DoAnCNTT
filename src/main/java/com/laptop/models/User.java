@@ -1,6 +1,8 @@
 package com.laptop.models;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -9,6 +11,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String username;
     private String password;
     private String fullname;
@@ -17,6 +20,9 @@ public class User {
     private int gender;
     private String address;
     private String role;
+
+    @Column(name = "registration_date")
+    private LocalDateTime registrationDate;
 
     @OneToMany(mappedBy = "user")
     private List<WishlistItem> wishlistItems;
@@ -121,6 +127,14 @@ public class User {
         this.role = role;
     }
 
+    public LocalDateTime getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(LocalDateTime registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
     public List<WishlistItem> getWishlistItems() {
         return wishlistItems;
     }
@@ -150,16 +164,17 @@ public class User {
         return new StringJoiner(", ", User.class.getSimpleName() + "[", "]")
                 .add("id=" + id)
                 .add("username='" + username + "'")
-                .add("password='[PROTECTED]'")  // Mask password to prevent logging sensitive info
+                .add("password='[PROTECTED]'") // Mask password to prevent logging sensitive info
                 .add("fullname='" + fullname + "'")
                 .add("email='" + email + "'")
                 .add("phoneNumber='" + phoneNumber + "'")
                 .add("gender=" + gender)
                 .add("address='" + address + "'")
                 .add("role='" + role + "'")
-                .add("wishlistItemsCount=" + (wishlistItems != null ? wishlistItems.size() : 0))  // Show count of wishlist items
-                .add("ordersCount=" + (orders != null ? orders.size() : 0))  // Show count of orders
-                .add("cart=" + (cart != null ? cart.getId() : "null"))  // Show cart ID or null if no cart
+                .add("registrationDate=" + registrationDate)
+                .add("wishlistItemsCount=" + (wishlistItems != null ? wishlistItems.size() : 0)) // Show count of wishlist items
+                .add("ordersCount=" + (orders != null ? orders.size() : 0)) // Show count of orders
+                .add("cart=" + (cart != null ? cart.getId() : "null")) // Show cart ID or null if no cart
                 .toString();
     }
 }

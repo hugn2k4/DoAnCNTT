@@ -36,6 +36,12 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
+          <a class="nav-link ${fn:startsWith(servletPath, '/admin/statisticalManage') ? 'active' : ''}"
+             href="${pageContext.request.contextPath}/admin/statisticalManage">
+            <i class="bi bi-pie-chart"></i> Thống kê
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link ${fn:startsWith(servletPath, '/admin/userManager') ? 'active' : ''}"
              href="${pageContext.request.contextPath}/admin/userManager">
             <i class="bi bi-people"></i> Quản lý người dùng
