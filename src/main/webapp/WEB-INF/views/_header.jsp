@@ -127,7 +127,7 @@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
             <li>
               <hr class="dropdown-divider" />
             </li>
-            <li><a class="dropdown-item" href="#">Tất cả danh mục</a></li>
+            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/all-products">Tất cả sản phẩm</a></li>
           </ul>
         </li>
         <li class="nav-item">
@@ -137,7 +137,7 @@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
           <a class="nav-link" href="${pageContext.request.contextPath}/best-selling">Sản phẩm bán chạy</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Khuyến mãi</a>
+          <a class="nav-link" href="${pageContext.request.contextPath}/promotions">Chương trình khuyến mãi</a>
         </li>
       </ul>
       <c:choose>

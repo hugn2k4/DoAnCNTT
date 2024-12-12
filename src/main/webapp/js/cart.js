@@ -28,6 +28,7 @@ const deliveryPriceRootElement = document.querySelector("#delivery-price");
 const totalPriceRootElement = document.querySelector("#total-price");
 const checkoutBtnElement = document.querySelector("#checkoutBtn");
 const deliveryMethodRadioElements = [...document.querySelectorAll("input[name='delivery-method']")];
+const addressInput = document.querySelector("#address");
 
 // COMPONENTS
 function cartItemRowComponent(props) {
@@ -178,6 +179,7 @@ async function _fetchPostAddOrder() {
     userId: currentUserIdMetaTag.content,
     deliveryMethod: state.order.deliveryMethod,
     deliveryPrice: state.order.deliveryPrice,
+    address: state.order.address, // Thêm trường address
     orderItems: orderItems,
   };
 
@@ -207,6 +209,7 @@ const initialCart = {
 const initialOrder = {
   deliveryMethod: 1,
   deliveryPrice: 15000,
+  address: '', // Thêm trường address, giá trị mặc định là chuỗi rỗng
 };
 
 const state = {
@@ -251,6 +254,10 @@ const state = {
     }
   },
   checkoutCart: async () => {
+    if (!state.order.address) {
+      createToast(toastComponent("Vui lòng nhập địa chỉ giao hàng!", "danger"));
+      return;
+    }
     if (confirm("Bạn có muốn đặt hàng?")) {
       const [status] = await _fetchPostAddOrder();
       if (status === 200) {
@@ -328,6 +335,11 @@ function attachEventHandlersForNoneRerenderElements() {
 
   // Attach event handlers for checkout button
   checkoutBtnElement.addEventListener("click", state.checkoutCart);
+
+  // Attach event handler for address input
+  addressInput.addEventListener("input", (event) => {
+    state.order.address = event.target.value.trim(); // Cập nhật state với giá trị nhập
+  });
 }
 
 // MAIN

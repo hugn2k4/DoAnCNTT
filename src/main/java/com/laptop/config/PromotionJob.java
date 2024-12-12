@@ -41,7 +41,6 @@ public class PromotionJob implements Job {
             RabbitMQUtils.declareQueue(channel);
 
             List<Promotion> promotions = promotionService.getAll();
-            System.out.println(promotions.size());
 
             for (Promotion promotion : promotions) {
                 LocalDateTime today = LocalDateTime.now(); // Ngày hiện tại dưới dạng LocalDateTime
@@ -50,8 +49,6 @@ public class PromotionJob implements Job {
 
                 // Kiểm tra nếu ngày bắt đầu chương trình là hôm nay
                 if (!today.isBefore(startDateTime) && !today.isAfter(endDateTime)) {
-
-                    System.out.println("khuyen mai dang hoat dong " + promotion.getName());
                     // Lấy danh sách tất cả email của người dùng đã đăng ký
                     List<String> customerEmails = userService.getAllEmail();
                     String subject = "Chương trình khuyến mãi: " + promotion.getName();
@@ -60,7 +57,6 @@ public class PromotionJob implements Job {
 
                     executorService.submit(() -> {
                         for (String email : customerEmails) {
-                            System.out.println("Sending email to: " + email + " for promotion: " + promotion.getName());
                             emailProducer.sendToQueue(email, subject, body, nameImg);
                         }
                     });
@@ -78,7 +74,6 @@ public class PromotionJob implements Job {
             executorService.shutdown();
         }
         // Lấy tất cả các chương trình khuyến mãi đang hoạt động
-
     }
 
     private String todayDate() {

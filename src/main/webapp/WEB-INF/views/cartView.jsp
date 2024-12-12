@@ -63,6 +63,10 @@
                            id="delivery-method-2" value="2" disabled>
                     <label class="form-check-label" for="delivery-method-2">Giao nhanh</label>
                   </div>
+                  <div class="mb-3">
+                    <label for="address" class="form-label">Địa chỉ giao hàng</label>
+                    <input type="text" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ giao hàng">
+                  </div>
                 </form>
               </div> <!-- card-body.// -->
             </div> <!-- card.// -->

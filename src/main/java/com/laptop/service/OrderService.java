@@ -13,7 +13,7 @@ public class OrderService extends OrderDAO {
     public OrderService() {
     }
 
-    public long insert(long userId, int status, int deliveryMethod, double deliveryPrice) {
+    public long insert(long userId, int status, int deliveryMethod, double deliveryPrice,String address) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
@@ -23,6 +23,7 @@ public class OrderService extends OrderDAO {
             order.setStatus(status);
             order.setDeliveryMethod(deliveryMethod);
             order.setDeliveryPrice(deliveryPrice);
+            order.setAddress(address);
             order.setCreatedAt(LocalDateTime.now());
             session.save(order);
             transaction.commit();

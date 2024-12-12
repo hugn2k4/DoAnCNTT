@@ -1,11 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: hieun
-  Date: 12/2/2024
-  Time: 2:10 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 
 <head>
@@ -19,7 +13,7 @@
 <section class="section-content">
     <div class="container">
         <header class="section-heading py-4">
-            <h3 class="section-title">Thêm thể loại</h3>
+            <h3 class="section-title">Thêm chương trình</h3>
         </header> <!-- section-heading.// -->
 
         <main class="row mb-5">
@@ -36,7 +30,7 @@
                     </div>
                 </c:if>
                 <div class="mb-3">
-                    <label for="promotion-name" class="form-label">Tên thể loại <span class="text-danger">*</span></label>
+                    <label for="promotion-name" class="form-label">Tên chương trình<span class="text-danger">*</span></label>
                     <input type="text"
                            class="form-control ${not empty requestScope.violations.nameViolations
                    ? 'is-invalid' : (not empty requestScope.promotion.name ? 'is-valid' : '')}"

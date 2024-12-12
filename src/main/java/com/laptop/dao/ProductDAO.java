@@ -227,4 +227,46 @@ public class ProductDAO extends AbstractDAO<Product> {
             return query.list();  // Trả về danh sách sản phẩm bán chạy
         }
     }
+
+    public int countByFilters(String filtersQuery) {
+        try (Session session = getCurrentSession()) {
+            // Nếu không có điều kiện lọc, trả về tổng số sản phẩm
+            if (filtersQuery == null || filtersQuery.isEmpty()) {
+                String hql = "SELECT COUNT(p.id) FROM Product p";
+                Long count = session.createQuery(hql, Long.class).uniqueResult();
+                return count != null ? count.intValue() : 0;
+            }
+
+            // Xây dựng truy vấn với bộ lọc
+            String hql = "SELECT COUNT(p.id) FROM Product p WHERE " + filtersQuery;
+            Query<Long> query = session.createQuery(hql, Long.class);
+            Long count = query.uniqueResult();
+            return count != null ? count.intValue() : 0;
+        }
+    }
+    public List<Product> getOrderedPartByFilters(int limit, int offset, String orderBy, String orderDir, String filtersQuery) {
+        try (Session session = getCurrentSession()) {
+            // Cơ sở của truy vấn
+            StringBuilder hql = new StringBuilder("FROM Product p");
+
+            // Thêm điều kiện lọc nếu có
+            if (filtersQuery != null && !filtersQuery.isEmpty()) {
+                hql.append(" WHERE ").append(filtersQuery);
+            }
+
+            // Thêm sắp xếp
+            hql.append(" ORDER BY p.").append(orderBy).append(" ").append(orderDir);
+
+            // Tạo truy vấn
+            Query<Product> query = session.createQuery(hql.toString(), Product.class);
+
+            // Thiết lập giới hạn và offset
+            query.setMaxResults(limit);
+            query.setFirstResult(offset);
+
+            // Trả về danh sách sản phẩm
+            return query.list();
+        }
+    }
+
 }

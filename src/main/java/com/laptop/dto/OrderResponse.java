@@ -8,13 +8,15 @@ public class OrderResponse {
     private String name;
     private int status;
     private double total;
+    private String address;
 
-    public OrderResponse(long id, String createdAt, String name, int status, double total) {
+    public OrderResponse(long id, String createdAt, String name, int status, double total,String address) {
         this.id = id;
         this.createdAt = createdAt;
         this.name = name;
         this.status = status;
         this.total = total;
+        this.address = address;
     }
 
     public long getId() {
@@ -55,6 +57,14 @@ public class OrderResponse {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setddress(String address) {
+        this.address = address;
     }
 
     @Override

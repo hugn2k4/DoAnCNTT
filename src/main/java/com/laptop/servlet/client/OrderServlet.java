@@ -73,7 +73,8 @@ public class OrderServlet extends HttpServlet {
                         order.getCreatedAt().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
                         check(orderItemService.getProductNamesByOrderId(order.getId())),
                         order.getStatus(),
-                        total + order.getDeliveryPrice());
+                        total + order.getDeliveryPrice(),
+                        order.getAddress());
 
                 orderResponses.add(orderResponse);
             }

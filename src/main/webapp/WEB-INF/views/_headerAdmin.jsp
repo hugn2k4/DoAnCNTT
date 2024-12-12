@@ -68,7 +68,7 @@
         <li class="nav-item">
           <a class="nav-link ${fn:startsWith(servletPath, '/admin/promotionManager') ? 'active' : ''}"
              href="${pageContext.request.contextPath}/admin/promotionManager">
-            <i class="bi bi-inboxes"></i> Quản lý khuyến mãi
+            <i class="bi bi-inboxes"></i> Quản lý quảng cáo
           </a>
         </li>
       </ul>

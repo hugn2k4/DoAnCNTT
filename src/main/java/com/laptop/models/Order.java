@@ -19,6 +19,7 @@
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
         private double totalPrice;
+        private String address;
 
         @ManyToOne
         @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -34,13 +35,15 @@
                      int deliveryMethod,
                      double deliveryPrice,
                      LocalDateTime createdAt,
-                     LocalDateTime updatedAt) {
+                     LocalDateTime updatedAt,
+                     String address) {
             this.id = id;
             this.status = status;
             this.deliveryMethod = deliveryMethod;
             this.deliveryPrice = deliveryPrice;
             this.createdAt = createdAt;
             this.updatedAt = updatedAt;
+            this.address = address;
         }
 
         public long getId() {
@@ -115,6 +118,14 @@
             this.totalPrice = totalPrice;
         }
 
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
+
         @Override
         public String toString() {
             return new StringJoiner(", ", Order.class.getSimpleName() + "[", "]")
@@ -127,6 +138,7 @@
                     .add("user=" + user)
                     .add("orderItems=" + orderItems)
                     .add("totalPrice=" + totalPrice)
+                    .add("address=" + address)
                     .toString();
         }
     }

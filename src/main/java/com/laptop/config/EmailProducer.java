@@ -10,13 +10,6 @@ public class EmailProducer {
 
     public void sendToQueue(String email, String subject, String body,String nameImg) {
         try {
-            // Kết nối RabbitMQ
-//            ConnectionFactory factory = new ConnectionFactory();
-//            factory.setHost(HOST);
-//            factory.setPort(5672);
-//            factory.setUsername("bpivmugb");
-//            factory.setPassword("laqf07nrbSLZSWzfm0ocENIzhHEUfssB");  // Thay thế bằng mật khẩu thực tế
-//            factory.setVirtualHost("bpivmugb");
             try (Connection connection = RabbitMQUtils.createConnection();
                  Channel channel = RabbitMQUtils.createChannel(connection)) {
                 // Khai báo hàng đợi
@@ -27,7 +20,6 @@ public class EmailProducer {
 
                 // Đẩy thông điệp vào hàng đợi
                 channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
-                System.out.println(" [x] Sent '" + message + "'");
             }
         } catch (Exception e) {
             e.printStackTrace();

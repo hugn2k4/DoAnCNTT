@@ -4,6 +4,8 @@ import com.laptop.models.Promotion;
 import com.laptop.utils.HibernateUtil;
 import org.hibernate.Session;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,6 +52,15 @@ public class PromotionDAO extends AbstractDAO<Promotion> {
             Long count = session.createQuery("select count(id) from Promotion", Long.class)
                     .uniqueResult();
             return count != null ? count.intValue() : 0;
+        }
+    }
+
+    public List<Promotion> getPromotions(int limit, int offset) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("from Promotion", Promotion.class)
+                    .setFirstResult(offset)
+                    .setMaxResults(limit)
+                    .getResultList();
         }
     }
 }

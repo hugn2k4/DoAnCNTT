@@ -54,7 +54,7 @@
                     <p class="lh-lg">
                         ${sessionScope.currentUser.fullname} <br>
                       Số điện thoại: ${sessionScope.currentUser.phoneNumber} <br>
-                      Địa chỉ: ${sessionScope.currentUser.address}
+                      Địa chỉ: ${requestScope.order.address}
                     </p>
                   </div>
                   <div class="col-lg-4">

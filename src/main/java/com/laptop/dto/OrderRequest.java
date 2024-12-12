@@ -9,17 +9,20 @@ public class OrderRequest {
     private final int deliveryMethod;
     private final double deliveryPrice;
     private final List<OrderItemRequest> orderItems;
+    private final String address;
 
     public OrderRequest(long cartId,
                         long userId,
                         int deliveryMethod,
                         double deliveryPrice,
-                        List<OrderItemRequest> orderItems) {
+                        List<OrderItemRequest> orderItems,
+                        String address) {
         this.cartId = cartId;
         this.userId = userId;
         this.deliveryMethod = deliveryMethod;
         this.deliveryPrice = deliveryPrice;
         this.orderItems = orderItems;
+        this.address = address;
     }
 
     public long getCartId() {
@@ -42,6 +45,10 @@ public class OrderRequest {
         return orderItems;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", OrderRequest.class.getSimpleName() + "[", "]")
@@ -50,6 +57,7 @@ public class OrderRequest {
                 .add("deliveryMethod=" + deliveryMethod)
                 .add("deliveryPrice=" + deliveryPrice)
                 .add("orderItems=" + orderItems)
+                .add("deliveryAddress='" + address + "'")
                 .toString();
     }
 }

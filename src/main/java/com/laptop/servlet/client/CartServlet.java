@@ -36,9 +36,8 @@ public class CartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Lấy đối tượng orderRequest từ JSON trong request
         OrderRequest orderRequest = JsonUtils.get(request, OrderRequest.class);
-
         // Tạo order
-            long orderId =orderService.insert(orderRequest.getUserId(), 1, orderRequest.getDeliveryMethod(), orderRequest.getDeliveryPrice());
+            long orderId =orderService.insert(orderRequest.getUserId(), 1, orderRequest.getDeliveryMethod(), orderRequest.getDeliveryPrice(),orderRequest.getAddress());
 
         String successMessage = "Đã đặt hàng và tạo đơn hàng thành công!";
         String errorMessage = "Đã có lỗi truy vấn!";
@@ -53,8 +52,6 @@ public class CartServlet extends HttpServlet {
                 HttpServletResponse.SC_NOT_FOUND);
 
         if (orderId > 0L) {
-
-
             Protector.of(() -> {
                         orderItemService.bulkInsert(orderId, orderRequest.getOrderItems());
                         cartService.delete(orderRequest.getCartId());

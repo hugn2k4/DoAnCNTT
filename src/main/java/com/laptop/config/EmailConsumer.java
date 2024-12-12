@@ -12,27 +12,15 @@ public class EmailConsumer {
     private static Channel channel;
 
     public static void consumeEmails() throws Exception {
-        // Tạo kết nối đến RabbitMQ
-//        ConnectionFactory factory = new ConnectionFactory();
-//        factory.setHost(HOST);
-//        factory.setPort(5672);
-//        factory.setUsername("bpivmugb");
-//        factory.setPassword("laqf07nrbSLZSWzfm0ocENIzhHEUfssB");  // Thay thế bằng mật khẩu thực tế
-//        factory.setVirtualHost("bpivmugb");
         Connection connection = RabbitMQUtils.createConnection();
-//        channel = connection.createChannel();
         Channel channel = RabbitMQUtils.createChannel(connection);
         // Khai báo hàng đợi
         channel.queueDeclare(QUEUE_NAME, true, false, false, null);
-
-        System.out.println("Waiting for messages. To exit press CTRL+C");
 
         // Định nghĩa phương thức xử lý thông điệp
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), "UTF-8");
             try {
-                System.out.println("Received message: " + message);
-
                 // Phân tích message
                 if (message.length() > 1) {
                     String[] messageParts = message.split("\\|");
@@ -48,8 +36,6 @@ public class EmailConsumer {
                     // Gửi email
                     String context = MailUtils.buildDetailPromotion(email, subject, body, img);
                     MailUtils.sendMail(email, subject, context);
-
-                    System.out.println("Email sent to: " + email);
                 } else {
                     System.out.println("Insufficient data in message.");
                 }

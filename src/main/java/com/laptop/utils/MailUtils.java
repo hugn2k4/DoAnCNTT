@@ -16,8 +16,8 @@ import java.util.Properties;
 public class MailUtils {
     private static final String SMTP_HOST = "smtp.gmail.com";
     private static final String SMTP_PORT = "587";
-    private static final String SMTP_USER = "hieunghia484@gmail.com";
-    private static final String SMTP_PASSWORD = "slpb pksv ygov bxqz";
+    private static final String SMTP_USER = "hcl2k4@gmail.com";
+    private static final String SMTP_PASSWORD = "kgcl gspa imtk fxes";
 
 
     public static void sendMail(String to, String subject, String content) throws MessagingException {
@@ -35,7 +35,7 @@ public class MailUtils {
                 return new PasswordAuthentication(SMTP_USER, SMTP_PASSWORD);
             }
         });
-        session.setDebug(true); // Đặt chế độ debug
+        session.setDebug(false); // Đặt chế độ debug
 
         try {
             MimeMessage message = new MimeMessage(session);
@@ -44,9 +44,7 @@ public class MailUtils {
             message.setSubject(subject);
            // message.setText(content);
             message.setContent(content, "text/html; charset=utf-8"); // Hỗ trợ email HTML
-
             Transport.send(message);
-            System.out.println("Email sent to: " + to);
         } catch (MessagingException e) {
             e.printStackTrace();
             System.err.println("Error while sending email: " + e.getMessage());
