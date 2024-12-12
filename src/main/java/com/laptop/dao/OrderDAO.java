@@ -1,7 +1,10 @@
 package com.laptop.dao;
 
 import com.laptop.models.Order;
+import com.laptop.models.OrderItem;
+import com.laptop.models.Product;
 import com.laptop.models.User;
+import com.laptop.servlet.admin.order.OrderManagerServlet;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -88,21 +91,44 @@ public class OrderDAO extends AbstractDAO<Order> {
             e.printStackTrace();
         }
     }
-
     public void confirm(long id) {
         try (Session session = getCurrentSession()) {
             Transaction transaction = session.beginTransaction();
-            Order order = session.get(Order.class, id);
+
+            // Lấy thông tin đơn hàng từ database
+            Order order = session.get(Order.class, (int) id); // Chuyển đổi từ long sang int nếu cần thiết
             if (order != null) {
-                order.setStatus(2); 
+                // Cập nhật trạng thái và thời gian cập nhật của đơn hàng
+                order.setStatus(2);
                 order.setUpdatedAt(LocalDateTime.now());
+
+                // Lấy danh sách sản phẩm trong đơn hàng và cập nhật totalBuy
+                List<OrderItem> items = order.getOrderItems(); // Giả định Order có mối quan hệ mapped với OrderItem
+                for (OrderItem item : items) {
+                    Product product = item.getProduct(); // Giả định OrderItem có mối quan hệ mapped với Product
+                    if (product != null) {
+                        int newTotalBuy = (int)(product.getTotalBuy() + item.getQuantity());
+                        product.setTotalBuy(newTotalBuy);
+                        session.update(product); // Cập nhật sản phẩm trong database
+                    }
+                }
+
+                // Tính toán và cập nhật tổng tiền của đơn hàng
+                double totalPrice = OrderManagerServlet.calculateTotalPrice(items, order.getDeliveryPrice());
+                order.setTotalPrice(totalPrice);
+
+                // Cập nhật đơn hàng
                 session.update(order);
             }
+
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
+
 
     public void cancel(long id) {
         try (Session session = getCurrentSession()) {
