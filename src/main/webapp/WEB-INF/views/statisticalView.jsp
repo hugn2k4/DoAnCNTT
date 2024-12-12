@@ -8,7 +8,6 @@
     <title>Thống kê</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-
         .container {
             width: 80%;
             max-width: 1200px;
