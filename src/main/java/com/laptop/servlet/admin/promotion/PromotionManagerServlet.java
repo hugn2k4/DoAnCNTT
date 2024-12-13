@@ -21,7 +21,7 @@ import java.util.Optional;
 public class PromotionManagerServlet extends HttpServlet {
     private final PromotionService promotionService = new PromotionService();
 
-    private static final int CATEGORIES_PER_PAGE = 5;
+    private static final int CATEGORIES_PER_PAGE = 8;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -1,9 +1,11 @@
 package com.laptop.servlet.client;
 
+import com.laptop.models.Category;
 import com.laptop.models.Order;
 import com.laptop.models.OrderItem;
 import com.laptop.models.User;
 import com.laptop.dto.OrderResponse;
+import com.laptop.service.CategoryService;
 import com.laptop.service.OrderItemService;
 import com.laptop.service.OrderService;
 import com.laptop.utils.Protector;
@@ -78,7 +80,9 @@ public class OrderServlet extends HttpServlet {
 
                 orderResponses.add(orderResponse);
             }
-
+            List<Category> categories = Protector.of(() -> new CategoryService().getPart(12, 0))
+                    .get(ArrayList::new);
+            request.setAttribute("categories", categories);
             request.setAttribute("totalPages", totalPages);
             request.setAttribute("page", page);
             request.setAttribute("orders", orderResponses);
@@ -94,7 +98,6 @@ public class OrderServlet extends HttpServlet {
         if (list.size() == 1) {
             return list.get(0);
         }
-
         return list.get(0) + " và " + (list.size() - 1) + " sản phẩm khác";
     }
 }

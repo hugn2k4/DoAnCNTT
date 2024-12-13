@@ -31,7 +31,7 @@
     <div class="container">
         <header class="border-bottom mb-4 pb-3">
             <div class="form-inline d-flex justify-content-between align-items-center">
-                <span>${requestScope.totalBestSellingProducts} sản phẩm bán chạy</span>
+                <span>Top các sản phẩm bán chạy</span>
             </div>
         </header>
 
@@ -89,43 +89,6 @@
                 </div> <!-- col.// -->
             </c:forEach>
         </div> <!-- row end.// -->
-
-        <c:if test="${requestScope.totalPages > 1}">
-            <nav class="mt-4">
-                <ul class="pagination">
-                    <li class="page-item ${requestScope.page == 1 ? 'disabled' : ''}">
-                        <a class="page-link"
-                           href="${pageContext.request.contextPath}/best-selling-products?page=${requestScope.page - 1}">
-                            Trang trước
-                        </a>
-                    </li>
-
-                    <c:forEach begin="1" end="${requestScope.totalPages}" var="i">
-                        <c:choose>
-                            <c:when test="${requestScope.page == i}">
-                                <li class="page-item active">
-                                    <a class="page-link">${i}</a>
-                                </li>
-                            </c:when>
-                            <c:otherwise>
-                                <li class="page-item">
-                                    <a class="page-link"
-                                       href="${pageContext.request.contextPath}/best-selling-products?page=${i}">${i}</a>
-                                </li>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
-
-                    <li class="page-item ${requestScope.page == requestScope.totalPages ? 'disabled' : ''}">
-                        <a class="page-link"
-                           href="${pageContext.request.contextPath}/best-selling-products?page=${requestScope.page + 1}">
-                            Trang sau
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </c:if>
-
     </div> <!-- container.// -->
 </section> <!-- section-content.// -->
 

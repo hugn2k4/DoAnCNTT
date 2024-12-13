@@ -1,16 +1,9 @@
 package com.laptop.utils;
 
-import jakarta.activation.DataHandler;
-import jakarta.activation.DataSource;
-import jakarta.activation.FileDataSource;
 import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
-import jakarta.mail.internet.MimeBodyPart;
 import jakarta.mail.internet.MimeMessage;
-import jakarta.mail.internet.MimeMultipart;
-import jakarta.mail.util.ByteArrayDataSource;
 
-import java.util.Base64;
 import java.util.Properties;
 
 public class MailUtils {
@@ -26,7 +19,7 @@ public class MailUtils {
         props.put("mail.smtp.port", SMTP_PORT);
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
-       // props.put("mail.transport.protocol", "smtps");
+        // props.put("mail.transport.protocol", "smtps");
         props.put("mail.debug", "true");
 
         Session session = Session.getInstance(props, new Authenticator() {
@@ -42,7 +35,7 @@ public class MailUtils {
             message.setFrom(new InternetAddress(SMTP_USER));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
             message.setSubject(subject);
-           // message.setText(content);
+            // message.setText(content);
             message.setContent(content, "text/html; charset=utf-8"); // Hỗ trợ email HTML
             Transport.send(message);
         } catch (MessagingException e) {

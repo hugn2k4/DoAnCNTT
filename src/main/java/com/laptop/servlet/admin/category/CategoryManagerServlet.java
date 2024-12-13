@@ -18,7 +18,7 @@ import java.util.Optional;
 public class CategoryManagerServlet extends HttpServlet {
     private final CategoryService categoryService = new CategoryService();
 
-    private static final int CATEGORIES_PER_PAGE = 5;
+    private static final int CATEGORIES_PER_PAGE = 8;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

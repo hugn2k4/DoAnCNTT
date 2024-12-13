@@ -18,7 +18,7 @@ import java.util.Optional;
 public class UserManagerServlet extends HttpServlet {
     private final UserService userService = new UserService();
 
-    private static final int USERS_PER_PAGE = 3;
+    private static final int USERS_PER_PAGE = 8;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
