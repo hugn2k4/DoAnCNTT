@@ -20,32 +20,13 @@ import java.util.Optional;
 public class BestSellingProductsServlet extends HttpServlet {
     private final ProductService productService = new ProductService();
 
-    private static final int PRODUCTS_PER_PAGE = 6; // Số sản phẩm trên mỗi trang
+    private static final int PRODUCTS_PER_PAGE = 3; // Số sản phẩm trên mỗi trang
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Tính tổng số sản phẩm bán chạy
-        int totalBestSellingProducts = Optional.ofNullable(productService.countProductsMax1Page()).orElse(0);
-
-        // Tính tổng số trang
-        int totalPages = totalBestSellingProducts / PRODUCTS_PER_PAGE;
-        if (totalBestSellingProducts % PRODUCTS_PER_PAGE != 0) {
-            totalPages++;
-        }
-
-        // Lấy trang hiện tại
-        String pageParam = Optional.ofNullable(request.getParameter("page")).orElse("1");
-        int page = Integer.parseInt(pageParam);
-        if (page < 1 || page > totalPages) {
-            page = 1;
-        }
-
-        // Tính mốc truy vấn (offset)
-        int offset = (page - 1) * PRODUCTS_PER_PAGE;
-
-        // Lấy danh sách sản phẩm bán chạy theo trang
+        // Lấy danh sách 3 sản phẩm bán chạy
         List<Product> bestSellingProducts = Optional.ofNullable(
-                productService.getBestSellingProducts(PRODUCTS_PER_PAGE, offset)
+                productService.getBestSellingProducts(3, 0) // Lấy 3 sản phẩm đầu tiên
         ).orElse(new ArrayList<>());
 
         // Lấy danh sách các danh mục (optionally)
@@ -54,9 +35,7 @@ public class BestSellingProductsServlet extends HttpServlet {
 
         // Gửi dữ liệu tới JSP
         request.setAttribute("categories", categories);
-        request.setAttribute("totalBestSellingProducts", totalBestSellingProducts);
-        request.setAttribute("totalPages", totalPages);
-        request.setAttribute("page", page);
+
         request.setAttribute("bestSellingProducts", bestSellingProducts);
 
         // Forward tới trang JSP hiển thị sản phẩm bán chạy

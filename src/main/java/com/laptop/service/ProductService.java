@@ -131,7 +131,7 @@ public class ProductService extends ProductDAO {
     }
 
     public List<Product> getBestSellingProducts(int limit, int offset) {
-        return getProductDAO().getBestSellingProducts( 6, 0);
+        return getProductDAO().getBestSellingProducts( limit, offset);
     }
 
     public int countProductsMax1Page() {

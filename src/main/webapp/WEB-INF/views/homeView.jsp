@@ -120,7 +120,7 @@
       <h3 class="section-title">Sản phẩm mới nhất</h3>
     </header> <!-- section-heading.// -->
     <div class="row item-grid">
-      <c:forEach var="product" items="${requestScope.products}">
+      <c:forEach var="product" items="${requestScope.products}" end="3">
         <div class="col-xl-3 col-lg-4 col-md-6 text-center">
           <div class="card p-3 shadow-sm rounded-4 h-100 border-0 text-center ">
             <!-- Image -->

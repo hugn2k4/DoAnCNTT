@@ -20,7 +20,7 @@ import java.util.Optional;
 @WebServlet(name = "AllProductServlet", value = "/all-products")
 public class AllProductServlet extends HttpServlet {
     private final ProductService productService = new ProductService();
-    private static final int PRODUCTS_PER_PAGE = 9;
+    private static final int PRODUCTS_PER_PAGE = 100;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

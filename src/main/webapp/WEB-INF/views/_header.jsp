@@ -6,11 +6,7 @@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
       <div class="row align-items-center">
         <div class="col-lg-3 py-3">
           <a class="text-body" href="${pageContext.request.contextPath}/">
-            <h3>
-              Laptop Shop
-
-              <span>🌱</span>
-            </h3>
+            <img src="images/logo.png" alt="Logo" width="200px" height="auto">
           </a>
         </div>
         <!-- col.// -->

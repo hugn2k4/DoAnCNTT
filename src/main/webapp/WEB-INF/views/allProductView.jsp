@@ -207,19 +207,6 @@
                         </div>
                     </c:forEach>
                 </div>
-
-                <!-- Phân trang -->
-                <c:if test="${totalPages > 1}">
-                    <nav class="mt-4">
-                        <ul class="pagination">
-                            <c:forEach begin="1" end="${totalPages}" var="i">
-                                <li class="page-item ${page == i ? 'active' : ''}">
-                                    <a class="page-link" href="${pageContext.request.contextPath}/products?page=${i}">${i}</a>
-                                </li>
-                            </c:forEach>
-                        </ul>
-                    </nav>
-                </c:if>
             </main>
         </div>
     </div>
